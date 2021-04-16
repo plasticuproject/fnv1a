@@ -1,7 +1,7 @@
 [![Build Status](https://travis-ci.com/plasticuproject/fnv1a.svg?branch=master)](https://travis-ci.com/plasticuproject/fnv1a)
 [![Python 3.7](https://img.shields.io/badge/python-3.6+-blue.svg)](https://www.python.org/downloads/release/python-370/)
 [![License: LGPL v3](https://img.shields.io/badge/License-LGPL%20v3-blue.svg)](https://www.gnu.org/licenses/lgpl-3.0)
-[![Coverage Status](https://coveralls.io/repos/github/plasticuproject/hibpwned/badge.svg?branch=master)](https://coveralls.io/github/plasticuproject/hibpwned?branch=master)
+[![Coverage Status](https://coveralls.io/repos/github/plasticuproject/fnv1a/badge.svg?branch=master)](https://coveralls.io/github/plasticuproject/fnv1a?branch=master)
 [![Language grade: Python](https://img.shields.io/lgtm/grade/python/g/plasticuproject/fnv1a.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/plasticuproject/fnv1a/context:python)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=plasticuproject_fnv1a&metric=alert_status)](https://sonarcloud.io/dashboard?id=plasticuproject_fnv1a)
 [![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=plasticuproject_fnv1a&metric=security_rating)](https://sonarcloud.io/dashboard?id=plasticuproject_fnv1a)
