@@ -28,8 +28,8 @@ class TestModule(unittest.TestCase):
         new_hasher = FNV1a()
         self.assertEqual(FNV1a().dehash([]), "")
         test = new_hasher.dehash(hasher.hash_list)
-        self.assertEqual(test, "This is a test.com bro.")
-        self.assertEqual(new_hasher.dehash([]), "This is a test.com bro.")
+        self.assertEqual(test, self._test_string)
+        self.assertEqual(new_hasher.dehash([]), self._test_string)
 
         # Test exception throwing for improper arguments
         self.assertRaises(TypeError, new_hasher.dehash, 1234)

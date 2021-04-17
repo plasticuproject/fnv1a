@@ -1,7 +1,7 @@
 """Setup file"""
 from setuptools import setup
 
-VERSION = '0.1.3'
+VERSION = '0.1.4'
 
 setup(name='fnv1a',
       packages=['fnv1a'],
