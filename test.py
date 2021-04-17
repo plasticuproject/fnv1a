@@ -8,10 +8,6 @@ class TestModule(unittest.TestCase):
     _text = ("FNV1a(seed=14695981039346656037, prime=1099511628211, "
              "mask=18446744073709551615, text=None, hash_out=None, "
              "hash_list=[])")
-    _test_list = ([
-        16158402040730025816208344980220,
-        17766350937091015824255301623556703254088714
-    ])
 
     def test_hash(self):
         """Test hashing function."""
@@ -29,7 +25,7 @@ class TestModule(unittest.TestCase):
         hasher = FNV1a()
         hasher.hash("This is a test.com bro.")
         new_hasher = FNV1a()
-        self.assertEqual(FNV1a().dehash([]), None)
+        self.assertEqual(FNV1a().dehash([]), "")
         test = new_hasher.dehash(hasher.hash_list)
         self.assertEqual(test, "This is a test.com bro.")
         self.assertEqual(new_hasher.dehash([]), "This is a test.com bro.")

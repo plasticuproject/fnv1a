@@ -1,4 +1,4 @@
-"""64 bit Fnv-1a hash module"""
+"""64 bit FNV-1a hash module"""
 
 
 class FNV1a:
@@ -49,16 +49,16 @@ class FNV1a:
         'This is a test.com bro.'
         >>>
     """
-    _seed = 14695981039346656037
-    _prime = 1099511628211
-    _mask = 0xFFFFFFFFFFFFFFFF
+    _seed: int = 14695981039346656037
+    _prime: int = 1099511628211
+    _mask: int = 0xFFFFFFFFFFFFFFFF
 
-    def __init__(self):
+    def __init__(self) -> None:
         self.hash_list = []
         self.hash_out = None
         self.text = None
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         return ('{}(seed={}, prime={}, mask={}, text={}, '
                 'hash_out={}, hash_list={})').format(self.__class__.__name__,
                                                      self._seed, self._prime,
@@ -69,9 +69,9 @@ class FNV1a:
     def hash(self, text: str) -> str:
         """Creates a 64 bit hash from a string input."""
         n_x, prime, mask = self._seed, self._prime, self._mask
-        self.hash_list = []
-        hash_list = self.hash_list
+        self._clear()
         self.text = str(text)
+        hash_list = self.hash_list
         for char in self.text:
             n_x = (n_x ^ ord(char)) * prime
             hash_list.append(n_x)
@@ -79,14 +79,14 @@ class FNV1a:
         hash_list.append(self._seed)
         return self.hash_out
 
-    def _clear(self):
-        """Clear variabels from instance."""
+    def _clear(self) -> None:
+        """Clear variables from instance."""
         self.hash_list = []
         self.hash_out = None
         self.text = None
 
-    def _type_check(self, value, value_type):
-        """Check hash_array types"""
+    def _type_check(self, value: any, value_type: any) -> None:
+        """Check hash_list types"""
         if not isinstance(value, value_type):
             self._clear()
             raise TypeError("Must supply a list of integers")
@@ -99,7 +99,7 @@ class FNV1a:
         if not hash_list:
             if not self.hash_list:
                 self._clear()
-                return None
+                return ""
             hash_list = self.hash_list
         self._type_check(hash_list[0], int)
         try:
