@@ -1,4 +1,5 @@
 """64 bit FNV-1a hash module"""
+from typing import List, Optional, Any
 
 
 class FNV1a:
@@ -54,9 +55,9 @@ class FNV1a:
     _mask: int = 0xFFFFFFFFFFFFFFFF
 
     def __init__(self) -> None:
-        self.hash_list = []
-        self.hash_out = None
-        self.text = None
+        self.hash_list: List[int] = []
+        self.hash_out: Optional[str] = None
+        self.text: Optional[str] = None
 
     def __repr__(self) -> str:
         return ('{}(seed={}, prime={}, mask={}, text={}, '
@@ -66,7 +67,7 @@ class FNV1a:
                                                      self.hash_out,
                                                      self.hash_list)
 
-    def hash(self, text: str) -> str:
+    def hash(self, text: Optional[str]) -> str:
         """Creates a 64 bit hash from a string input."""
         n_x, prime, mask = self._seed, self._prime, self._mask
         self._clear()
@@ -85,13 +86,13 @@ class FNV1a:
         self.hash_out = None
         self.text = None
 
-    def _type_check(self, value: any, value_type: any) -> None:
+    def _type_check(self, value: Any, value_type: Any) -> None:
         """Check hash_list types"""
         if not isinstance(value, value_type):
             self._clear()
             raise TypeError("Must supply a list of integers")
 
-    def dehash(self, hash_list: list = None) -> str:
+    def dehash(self, hash_list: Optional[List[int]] = None) -> Optional[str]:
         """Dehashes/reverts a hash list used to build a hash and returns the
          original string."""
         prime, out = self._prime, []
