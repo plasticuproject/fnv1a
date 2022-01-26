@@ -1,5 +1,5 @@
-[![Build Status](https://travis-ci.com/plasticuproject/fnv1a.svg?branch=master)](https://app.travis-ci.com/plasticuproject/fnv1a)
-[![Python 3.7](https://img.shields.io/badge/python-3.6+-blue.svg)](https://www.python.org/downloads/release/python-370/)
+[![build](https://github.com/plasticuproject/fnv1a/actions/workflows/tests.yml/badge.svg)](https://github.com/plasticuproject/fnv1a/actions/workflows/tests.yml)
+[![Python 3.8](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/release/python-380/)
 ![GitHub](https://img.shields.io/github/license/plasticuproject/fnv1a)
 [![PyPI version](https://badge.fury.io/py/fnv1a.svg)](https://badge.fury.io/py/fnv1a)
 [![Downloads](https://pepy.tech/badge/fnv1a)](https://pepy.tech/project/fnv1a)
