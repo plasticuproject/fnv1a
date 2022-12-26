@@ -87,7 +87,6 @@ class FNV1a:
         """
         n_x, prime, mask = self._seed, self._prime, self._mask
         self._clear()
-        # self.text = str(text)
         self.text = text
         hash_list = self.hash_list
         if self.text:
