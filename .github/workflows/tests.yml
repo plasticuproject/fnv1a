@@ -8,9 +8,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
     - name: Set up Python 3.8
-      uses: actions/setup-python@v2
+      uses: actions/setup-python@v3
       with:
         python-version: "3.8"
     - name: Install dependencies
@@ -26,6 +26,9 @@ jobs:
     - name: Static type checking with mypy
       run: |
         python -m mypy --strict .
+    - name: Doc tests
+      run: |
+        python -m doctest fnv1a/__init__.py -v
     - name: Unit tests
       run: |
         python -m unittest -v

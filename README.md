@@ -10,11 +10,9 @@
 
 # fnv1a
 
-I'm always talking shit about Object Oriented Programming. Well to show that I can 
-actually write a little OOP (I just choose not to do so most of the time), I 
-implimented a 64 bit FNV-1a hashing algorithm, class based, with objects and instances 
-and all that crap, into a python module. It's completely useless and ridiculous and 
-it makes no sense, but I was really bored.
+OOP implimentation of a 64 bit FNV-1a hashing algorithm, where you can create hash
+objects with "states" and "dehash" a list of "states" to recreate the original string.
+It's completely useless and ridiculous and it makes no sense, but I was really bored.
 
 ```pip install fnv1a```
 

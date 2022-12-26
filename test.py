@@ -6,15 +6,18 @@ from fnv1a import FNV1a
 
 class TestModule(unittest.TestCase):
     """Test all functionality for fnv1a module"""
-    _text: str = ("FNV1a(seed=14695981039346656037, prime=1099511628211, "
-                  "mask=18446744073709551615, text=None, hash_out=None, "
-                  "hash_list=[])")
+    _text: str = ("FNV1a(seed=14695981039346656037,\n"
+                  "      prime=1099511628211,\n"
+                  "      mask=18446744073709551615,\n"
+                  "      text=None,\n"
+                  "      hash_out=None,\n"
+                  "      hash_list=[])")
     _test_string: str = "This is a test.com bro."
 
     def test_hash(self) -> None:
         """Test hashing function."""
         hasher: FNV1a = FNV1a()
-        test: str = hasher.hash(self._test_string)
+        test: Optional[str] = hasher.hash(self._test_string)
         self.assertEqual(test, 'ade2f4095d74bf44')
 
     def test_repr(self) -> None:
