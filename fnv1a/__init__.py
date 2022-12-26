@@ -30,25 +30,30 @@ class FNV1a:
     ...
 
     USAGE:
-        >>> from fnv1a import FNV1a
-        >>>
-        >>> hasher = FNV1a()
-        >>> hasher
-        FNV1a(seed=14695981039346656037, prime=1099511628211,
-         mask=18446744073709551615, text=None, hash_out=None, hash_list=[])
-        >>>
-        >>> hasher.hash("This is a test.com bro.")
-        'ade2f4095d74bf44'
-        >>>
-        >>>
-        >>> new_hasher = FNV1a()
-        >>> new_hasher
-        FNV1a(seed=14695981039346656037, prime=1099511628211,
-         mask=18446744073709551615, text=None, hash_out=None, hash_list=[])
-        >>>
-        >>> new_hasher.dehash(hasher.hash_list)
-        'This is a test.com bro.'
-        >>>
+    >>> hasher = FNV1a()
+    >>> hasher
+    FNV1a(seed=14695981039346656037,
+          prime=1099511628211,
+          mask=18446744073709551615,
+          text=None,
+          hash_out=None,
+          hash_list=[])
+    >>>
+    >>> hasher.hash("This is a test.com bro.")
+    'ade2f4095d74bf44'
+    >>>
+    >>> new_hasher = FNV1a()
+    >>> new_hasher
+    FNV1a(seed=14695981039346656037,
+          prime=1099511628211,
+          mask=18446744073709551615,
+          text=None,
+          hash_out=None,
+          hash_list=[])
+    >>>
+    >>> new_hasher.dehash(hasher.hash_list)
+    'This is a test.com bro.'
+    >>>
     """
     _seed: int = 14695981039346656037
     _prime: int = 1099511628211
@@ -60,24 +65,37 @@ class FNV1a:
         self.text: Optional[str] = None
 
     def __repr__(self) -> str:
-        return ('{}(seed={}, prime={}, mask={}, text={}, '
-                'hash_out={}, hash_list={})').format(self.__class__.__name__,
-                                                     self._seed, self._prime,
-                                                     self._mask, self.text,
-                                                     self.hash_out,
-                                                     self.hash_list)
+        return (f"{self.__class__.__name__}(seed={self._seed},\n"
+                f"      prime={self._prime},\n"
+                f"      mask={self._mask},\n"
+                f"      text={self.text},\n"
+                f"      hash_out={self.hash_out},\n"
+                f"      hash_list={self.hash_list})")
 
-    def hash(self, text: Optional[str]) -> str:
-        """Creates a 64 bit hash from a string input."""
+    def hash(self, text: Optional[str]) -> Optional[str]:
+        """Creates a 64 bit hash from a string input.
+
+        Parameters
+        ----------
+        arg1 : str
+            Text to hash
+
+        Returns
+        -------
+        str
+            64 bit fvn-1a hash of parameter string
+        """
         n_x, prime, mask = self._seed, self._prime, self._mask
         self._clear()
-        self.text = str(text)
+        # self.text = str(text)
+        self.text = text
         hash_list = self.hash_list
-        for char in self.text:
-            n_x = (n_x ^ ord(char)) * prime
-            hash_list.append(n_x)
-        self.hash_out = hex(n_x & mask)[2:]
-        hash_list.append(self._seed)
+        if self.text:
+            for char in self.text:
+                n_x = (n_x ^ ord(char)) * prime
+                hash_list.append(n_x)
+            self.hash_out = hex(n_x & mask)[2:]
+            hash_list.append(self._seed)
         return self.hash_out
 
     def _clear(self) -> None:
@@ -94,7 +112,18 @@ class FNV1a:
 
     def dehash(self, hash_list: Optional[List[int]] = None) -> Optional[str]:
         """Dehashes/reverts a hash list used to build a hash and returns the
-         original string."""
+        original string.
+
+        Parameters
+        ----------
+        arg1 : list of str
+            List of hash states to "dehash"
+
+        Returns
+        -------
+        str
+            Original text that was hashed with list of hash states
+        """
         prime, out = self._prime, []
         self._type_check(hash_list, list)
         if not hash_list:
@@ -108,9 +137,9 @@ class FNV1a:
                 self._type_check(i, int)
                 char = (hash_list[i] // prime) ^ hash_list[i - 1]
                 out.append(chr(char))
-                self.text = ''.join(out[::-1])
+                self.text = "".join(out[::-1])
         except (OverflowError, ValueError) as error:
             self._clear()
             raise ValueError("Invalid input, could not be dehashed") from error
-        self.hash_out, self.hash_list = FNV1a().hash(self.text), hash_list
+        self.hash_out, self.hash_list = self.hash(self.text), hash_list
         return self.text
