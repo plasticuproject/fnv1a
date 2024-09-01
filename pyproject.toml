@@ -6,7 +6,7 @@ build-backend = "setuptools.build_meta"
 name = "fnv1a"
 version = "0.1.6"
 authors = [
-  { name="plasticuproject", email="plasticuproject.pm.me" },
+  { name="plasticuproject", email="plasticuproject@pm.me" },
 ]
 description = "64 bit Fnv-1a hash module."
 readme = "README.md"
