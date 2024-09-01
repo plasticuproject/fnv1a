@@ -1,6 +1,6 @@
 """Unit tests for fnv1a module"""
+from __future__ import annotations
 import unittest
-from typing import Optional
 from fnv1a import FNV1a
 
 
@@ -17,7 +17,7 @@ class TestModule(unittest.TestCase):
     def test_hash(self) -> None:
         """Test hashing function."""
         hasher: FNV1a = FNV1a()
-        test: Optional[str] = hasher.hash(self._test_string)
+        test: str | None = hasher.hash(self._test_string)
         self.assertEqual(test, 'ade2f4095d74bf44')
 
     def test_repr(self) -> None:
@@ -31,7 +31,7 @@ class TestModule(unittest.TestCase):
         hasher.hash(self._test_string)
         new_hasher: FNV1a = FNV1a()
         self.assertEqual(FNV1a().dehash([]), "")
-        test: Optional[str] = new_hasher.dehash(hasher.hash_list)
+        test: str | None = new_hasher.dehash(hasher.hash_list)
         self.assertEqual(test, self._test_string)
         self.assertEqual(new_hasher.dehash([]), self._test_string)
 

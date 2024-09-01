@@ -1,5 +1,8 @@
 """64 bit FNV-1a hash module"""
-from typing import List, Optional, Any
+from __future__ import annotations
+from typing import TypeVar, Type
+
+T = TypeVar("T")
 
 
 class FNV1a:
@@ -60,9 +63,9 @@ class FNV1a:
     _mask: int = 0xFFFFFFFFFFFFFFFF
 
     def __init__(self) -> None:
-        self.hash_list: List[int] = []
-        self.hash_out: Optional[str] = None
-        self.text: Optional[str] = None
+        self.hash_list: list[int] = []
+        self.hash_out: str | None = None
+        self.text: str | None = None
 
     def __repr__(self) -> str:
         return (f"{self.__class__.__name__}(seed={self._seed},\n"
@@ -72,7 +75,7 @@ class FNV1a:
                 f"      hash_out={self.hash_out},\n"
                 f"      hash_list={self.hash_list})")
 
-    def hash(self, text: Optional[str]) -> Optional[str]:
+    def hash(self, text: str | None) -> str | None:
         """Creates a 64 bit hash from a string input.
 
         Parameters
@@ -103,13 +106,14 @@ class FNV1a:
         self.hash_out = None
         self.text = None
 
-    def _type_check(self, value: Any, value_type: Any) -> None:
+    def _type_check(self, value: T, value_type: Type[T]) -> None:
         """Check hash_list types"""
         if not isinstance(value, value_type):
             self._clear()
-            raise TypeError("Must supply a list of integers")
+            raise TypeError(
+                f"Expected type {value_type}, but got type {type(value)}")
 
-    def dehash(self, hash_list: Optional[List[int]] = None) -> Optional[str]:
+    def dehash(self, hash_list: list[int] | None = None) -> str | None:
         """Dehashes/reverts a hash list used to build a hash and returns the
         original string.
 
